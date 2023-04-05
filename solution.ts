@@ -1,3 +1,6 @@
+let inputLines = ['0', '0'] //This line is not used, it is only there to avoid the error
+
+
 /* SolveMeFirst  */
 function main() {
     let a = parseInt(inputLines[0])
@@ -79,3 +82,23 @@ function staircase(n: number): void {
     }
 }
 
+/*Mini-Max Sum*/
+function miniMaxSum(arr: number[]): void {
+    // Write your code here
+    let result = [0, 0]
+    arr.sort()
+    arr.forEach(( el, index ) => {
+        if(index < arr.length-1) result[0]+=el
+        if(index > 0) result[1]+=el
+    })
+    console.log(result[0], result[1])
+}
+
+/*Bithday Cake Candles*/
+function birthdayCakeCandles(candles: number[]): number {
+    // Write your code here
+    let result = 0, tallestCandle = Math.max(...candles)
+    candles.forEach(el => el === tallestCandle ? result++ : null )
+    
+    return result
+}
