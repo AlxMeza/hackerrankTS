@@ -31,7 +31,6 @@ function compareTriplets(a: number[], b: number[]): number[] {
 
 /*A very Big Sum*/
 function aVeryBigSum(ar: number[]): number {
-    // Write your code here
     let result = 0
     ar.forEach(el => result+=el)
     
@@ -54,7 +53,6 @@ function diagonalDifference(arr: number[][]): number {
 
 /*Plus Minus*/
 function plusMinus(arr: number[]): void {
-    // Write your code here
     let result = {positive: 0, negative: 0, zeros: 0}
     
     arr.forEach(el => {
@@ -70,7 +68,6 @@ function plusMinus(arr: number[]): void {
 
 /*StairCase*/
 function staircase(n: number): void {
-    // Write your code here
     let stair = '#'
     for(let i = 0; i < n; i++){
         let space = ''
@@ -84,7 +81,6 @@ function staircase(n: number): void {
 
 /*Mini-Max Sum*/
 function miniMaxSum(arr: number[]): void {
-    // Write your code here
     let result = [0, 0]
     arr.sort()
     arr.forEach(( el, index ) => {
@@ -96,9 +92,62 @@ function miniMaxSum(arr: number[]): void {
 
 /*Bithday Cake Candles*/
 function birthdayCakeCandles(candles: number[]): number {
-    // Write your code here
     let result = 0, tallestCandle = Math.max(...candles)
     candles.forEach(el => el === tallestCandle ? result++ : null )
     
     return result
 }
+
+/*Time Conversion*/
+function timeConversion(s: string): string {
+    let hour = s.split(':'), format = s.slice(8)
+    if( format === 'PM' && hour[0] !== '12') hour[0] = (parseInt(hour[0])+12).toString()
+    if( format === 'AM' && hour[0] === '12') hour[0] = '00'
+    hour[2] = hour[2].slice(0, 2)
+    
+    return `${hour[0]}:${hour[1]}:${hour[2]}`
+}
+
+/*Grading students*/
+function gradingStudents(grades: number[]): number[] {
+    let result: number [] = [], iterator = 0
+    
+    grades.forEach(el => {
+        if(el < 38) result.push(el)
+        else{
+            while( (iterator+el) % 5 !== 0) iterator++
+            iterator < 3 ? result.push(el+iterator) : result.push(el)
+            iterator = 0
+        }
+    })
+    
+    return result
+}
+
+/*Apple and Orange*/
+function countApplesAndOranges(s: number, t: number, a: number, b: number, apples: number[], oranges: number[]): void {
+    let fruits = {oranges: 0, apples: 0}
+    apples.forEach( el => (a+el) >= s && (a+el) <= t ? fruits.apples++ : null )
+    oranges.forEach( el => (b+el) >= s && (b+el) <= t ? fruits.oranges++ : null )
+    
+    console.log(fruits.apples)
+    console.log(fruits.oranges)            
+}
+
+/*Number Line Jumps*/
+function getDistance (x1: number, v1: number, x2: number, v2: number): string {
+    let distance = ( x2 - x1 ) / (v1 - v2)
+    let res = ''
+    distance < 0 ? res = 'NO' : distance % 1 === 0 ? res = 'YES' : res ='NO'
+    return res
+}
+
+function kangaroo(x1: number, v1: number, x2: number, v2: number): string {
+    if(x1 < x2 && v1 < v2) return 'NO'
+    else if (x2 < x1 && v2 < v1) return 'NO'
+    else{
+        return getDistance(x1, v1, x2, v2)
+    }
+}
+
+/*Between two sets*/
