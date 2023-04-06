@@ -151,3 +151,127 @@ function kangaroo(x1: number, v1: number, x2: number, v2: number): string {
 }
 
 /*Between two sets*/
+function getTotalX(a: number[], b: number[]): number {
+    let res = 0, num = a[a.length-1], flag = false
+    while ( num <= b[0] ){
+        flag = false
+        a.forEach(e => num % e !== 0 ? flag = true: null )
+        b.forEach(el => el % num !== 0 ? flag = true: null )
+        flag == false && res++
+        num += 1
+    }
+    
+    return res
+}
+
+/*Breaking the records*/
+function breakingRecords(scores: number[]): number[] {
+    let scoreData = { max: scores[0], maxChange: 0, min: scores[0], minChange: 0 }
+    scores.map(el => {
+        if(el > scoreData.max){
+            scoreData.max = el
+            scoreData.maxChange += 1
+        }
+        else if( el < scoreData.min ){
+            scoreData.min = el
+            scoreData.minChange += 1
+        }
+    })
+    return [scoreData.maxChange, scoreData.minChange]
+}
+
+/*SubArray Division*/
+function birthday(s: number[], d: number, m: number): number {
+    let res = { sum: 0, cont: 0, actual: 0, prev: 0 }
+    
+    while( res.actual <= s.length ){
+        if( res.actual < m ){
+        res.sum += s[res.actual]
+        res.actual ++
+        }else if( res.actual === m ){
+            res.sum === d ? res.cont++ : null
+            res.prev ++
+            res.actual = res.prev
+            res.sum = 0
+            m++
+        }
+    }
+    
+    return res.cont
+}
+
+/*Divisible Sum of Pairs*/
+function divisibleSumPairs(n: number, k: number, ar: number[]): number {
+    let res = 0, cont = 1
+    ar.map(el => {
+        for(let i = cont; i < n; i++){
+            if((el + ar[i]) % k === 0) res++
+        }
+        cont++
+    })
+    return res
+}
+
+/*Migratory Birds*/
+function migratoryBirds(arr: number[]): number {
+    const res: Record<string, any> = {}
+    let max = 0, id
+    res[`type${arr[0]}`] = 0
+    arr.map(el => {
+        if( `type${el}` in res) res[`type${el}`]++
+        else {
+            res[`type${el}`] = 1
+        }
+    })
+    
+    for(const prop in res){
+        if(res[prop] > max){
+            id = prop
+            max = res[prop]
+        }
+      if(res[prop] === max && prop < id) id = prop 
+    }
+    
+    return parseInt(id.slice(4, id.length))
+}
+
+/*Day of Programmer*/
+function dayOfProgrammer(year: number): string {
+    let fecha = new Date(`01/01/${year}`)
+     
+    let day = 255
+    year === 1918 ? day = day+13 : 
+    year <= 1917 && (year % 4 === 0 && year % 100 == 0) ? day = 254 : day = 255
+     
+    fecha.setDate(fecha.getDate() + day)
+    let date = fecha.toLocaleDateString('es-MX', {year:'numeric', month: '2-digit', day: '2-digit'})
+    return `${date.slice(0,2)}.${date.slice(3,5)}.${date.slice(6,10)}`
+}
+
+/*Bill division*/
+function bonAppetit(bill: number[], k: number, b: number): void {
+    let item = bill[k], sum = 0
+    delete(bill[k])
+    bill.forEach(el => sum+=el)
+    sum/2 === b ? console.log('Bon Appetit') : console.log(b - sum/2)
+}
+
+/*Sales by Match*/
+function sockMerchant(n: number, ar: number[]): number {
+    let init = ar.shift(), cont = 0, res = 0
+    while(cont < ar.length){
+        if( init === ar[cont] && init !== -1){
+            res++
+            ar[cont] = -1
+            init = ar.shift()
+            cont = -1
+        }
+        else if(cont === ar.length-1){
+            init = ar.shift()
+            cont = -1
+        }
+        cont++
+    }
+    
+    return res
+}
