@@ -275,3 +275,18 @@ function sockMerchant(n: number, ar: number[]): number {
     
     return res
 }
+
+/*Drawing Book*/
+function pageCount(n: number, p: number): number {
+    let result = 0, pagesToFlip = 0
+    if( p === 1 ) return 0
+    else if ( n%2 !== 0 && (p === n || p === n-1) ) return 0
+    else if ( n%2 === 0 && p === n) return 0
+    else {
+        (n-p) <= (p-1) ? pagesToFlip = n-p : p%2 === 0 ? pagesToFlip = p : pagesToFlip = p-1
+        p%2 === 0 && n%2 !== 0 ? result = Math.floor(pagesToFlip/2) : result = Math.round(pagesToFlip/2)
+    }
+        
+    return result
+}
+
