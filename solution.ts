@@ -290,3 +290,24 @@ function pageCount(n: number, p: number): number {
     return result
 }
 
+/*Counting Valleys*/
+function countingValleys(steps: number, path: string): number {
+    let valley = { num: 0, level: path[0] === 'U' ? 1 : -1, prevLevel: 0 }
+    path = path+'E'
+
+    for (let i = 1; i < path.length; i++){
+        if( valley.prevLevel < 0 && valley.level === 0) valley.num++
+        if( path[i] === 'U' ){
+            valley.prevLevel = valley.level
+            valley.level++
+        }else if( path[i] === 'D' ){
+            valley.prevLevel = valley.level
+            valley.level--
+        }else if( path[i] === 'E'){
+            valley.prevLevel = valley.level
+            valley.level = 0
+        }  
+    }
+    
+    return valley.num
+}
